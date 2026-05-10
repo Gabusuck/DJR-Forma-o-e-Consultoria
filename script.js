@@ -61,13 +61,33 @@ document.querySelectorAll('.faq-question').forEach(question => {
     });
 });
 
-// Mobile Menu Toggle (Simplified)
+// Mobile Menu Toggle
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
+const navLinksItems = document.querySelectorAll('.nav-links a');
 
 if (menuToggle) {
     menuToggle.addEventListener('click', () => {
-        // In a real app, we'd add a mobile-active class and style it in CSS
-        alert('Menu mobile em desenvolvimento. Redimensione para desktop para melhor visualização.');
+        navLinks.classList.toggle('active');
+        
+        // Toggle Icon
+        const icon = menuToggle.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fas', 'fa-bars');
+            icon.classList.add('fas', 'fa-times');
+        } else {
+            icon.classList.remove('fas', 'fa-times');
+            icon.classList.add('fas', 'fa-bars');
+        }
     });
 }
+
+// Close mobile menu when clicking a link
+navLinksItems.forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.remove('fas', 'fa-times');
+        icon.classList.add('fas', 'fa-bars');
+    });
+});
